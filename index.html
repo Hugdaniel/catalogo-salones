@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/assets/logo-vision.png" type="image/x-icon">
+    <title>catalogo para salones</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+    <!-- LOADER CINEMATOGRÁFICO DE BIENVENIDA -->
+    <div id="loader" class="loader-container">
+        <div class="loader-content">
+            <!-- Contenedor del Logo con efecto de brillo -->
+            <div class="logo-wrapper">
+                <img src="/assets/logo-vision.png" alt="Logo del Salón" class="logo-cinematic">
+                <div class="shimmer-effect"></div>
+            </div>
+            <!-- Indicador de carga sutil -->
+            <div class="loader-spinner-bar"></div>
+        </div>
+    </div>
+
+    <!-- ENCABEZADO / HERO SECTION -->
+<header class="hero-catalog">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <!-- Logo del Salón adaptable -->
+        <img src="/assets/logo-vision.png" alt="Logo del Salón" class="hero-logo">
+        
+        <!-- Título enfocado en la experiencia del cliente -->
+        <h1 class="hero-title">Experiencias Digitales Exclusivas para tu Evento</h1>
+        
+        <!-- Línea sutil divisoria -->
+        <div class="hero-divider"></div>
+        
+        <!-- Breve descripción del propósito del catálogo -->
+        <p class="hero-description">
+            Bienvenidos a nuestro catálogo de soluciones interactivas. Diseñamos el ecosistema digital de tu fiesta: desde invitaciones inteligentes con confirmación en tiempo real hasta álbumes en la nube para capturar cada recuerdo. Todo personalizado, moderno y al alcance de tus invitados.
+        </p>
+    </div>
+</header>
+
+    <!-- CONTENIDO PRINCIPAL (Oculto inicialmente por CSS) -->
+    <div id="main-content" class="content-hidden">
+        <!-- Acá va el resto de tu catálogo (Hero, Artículos, etc.) -->
+        <!-- <h1>Contenido del catálogo listo</h1> -->
+        <!-- CATEGORÍA 1: INVITACIONES ESTÁTICAS -->
+<article class="category-section">
+    <div class="category-header">
+        <h2 class="category-title">Invitaciones Estáticas Digitales</h2>
+        <p class="category-description">
+            Diseños exclusivos de alta calidad, optimizados para enviar de forma rápida por WhatsApp o redes sociales.
+            estas tienen ubicación del lugar y confirmación de asistencia para un mejor control de tu evento.
+            Elegí la temática que mejor se adapte a tu celebración.
+        </p>
+    </div>
+
+    <!-- Contenedor del Visualizador Dinámico -->
+    <div class="showcase-container">
+        
+        <!-- Galería de Imágenes (Solo una visible a la vez) -->
+        <div class="gallery-display">
+            <div id="model-infantil" class="gallery-item active">
+                <img src="/assets/standar.png" alt="Invitación Estática Infantil">
+                <div class="model-badge">Línea Infantil</div>
+            </div>
+            
+            <div id="model-xv" class="gallery-item">
+                <img src="/assets/15-standar.png" alt="Invitación Estática Quince Años">
+                <div class="model-badge">Línea Quince Años</div>
+            </div>
+            
+            <div id="model-bodas" class="gallery-item">
+                <img src="/assets/estatica-boda.jpg" alt="Invitación Estática Bodas">
+                <div class="model-badge">Línea Bodas Premium</div>
+            </div>
+        </div>
+
+        <!-- Botones Selectores de Categoría -->
+        <div class="filter-controls">
+            <button class="filter-btn active" data-target="model-infantil">Infantiles</button>
+            <button class="filter-btn" data-target="model-xv">Quince Años</button>
+            <button class="filter-btn" data-target="model-bodas">Bodas</button>
+        </div>
+        
+    </div>
+</article>
+    </div>
+
+    <!-- VINCULACIÓN DEL SCRIPT -->
+    <script src="main.js"></script>
+</body>
+</html>

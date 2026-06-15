@@ -1,0 +1,376 @@
+/* VARIABLES ESPECÍFICAS PARA EL LOADER */
+:root {
+    --bg-loader-premium: #0a0a0a; /* Negro cinematográfico puro */
+    --color-linea-carga: #bd9b53;  /* Dorado premium del salón */
+}
+
+/* VARIABLES COMPLEMENTARIAS PARA EL HERO */
+:root {
+    --bg-hero-salon: #ffffff;       /* Fondo limpio (blanco o contratono según el salón) */
+    --texto-hero-principal: #1a1a1a;/* Color de títulos */
+    --texto-hero-bajada: #555555;   /* Color de la descripción */
+    --color-detalles: #bd9b53;      /* Color de acento (Dorado, plateado, etc.) */
+}
+
+/* RESET BASE PARA EL COMPORTAMIENTO DEL LOADER */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+/* CONTENEDOR PRINCIPAL DEL LOADER */
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-loader-premium);
+    display: table; 
+    z-index: 99999; /* Por encima de todo */
+    overflow: hidden;
+}
+
+.loader-content {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+/* WRAPPER DEL LOGO Y ANIMACIÓN ZOOM IN + BLUR */
+.logo-wrapper {
+    position: relative;
+    display: inline-block;
+    max-width: 180px; 
+    margin-bottom: 25px;
+}
+
+.logo-cinematic {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: 0;
+    filter: blur(8px);
+    transform: scale(0.85);
+    animation: logoReveal 1.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* EFECTO DE BRILLO (SHIMMER) PASANDO POR EL LOGO */
+.shimmer-effect {
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.25) 50%,
+        rgba(255, 255, 255, 0) 100
+    );
+    transform: skewX(-25deg);
+    animation: shinePass 1.2s ease-in-out 0.8s forwards;
+}
+
+/* BARRA DE PROGRESO INFERIOR */
+.loader-spinner-bar {
+    width: 100px;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 0 auto;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+}
+
+.loader-spinner-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background-color: var(--color-linea-carga);
+    animation: progressFill 1.8s ease-in-out forwards;
+}
+
+/* --- KEYFRAMES DE LAS ANIMACIONES --- */
+
+/* 1. Revelado del logo estilo intro */
+@keyframes logoReveal {
+    0% {
+        opacity: 0;
+        filter: blur(10px);
+        transform: scale(0.8);
+    }
+    15% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 1;
+        filter: blur(0);
+        transform: scale(1);
+    }
+}
+
+/* 2. Brillo metálico cruzando el logo */
+@keyframes shinePass {
+    0% { left: -150%; }
+    100% { left: 150%; }
+}
+
+/* 3. Llenado de la barra de carga */
+@keyframes progressFill {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+/* ESTADOS DEL CONTENIDO PRINCIPAL */
+.content-hidden {
+    display: none;
+    opacity: 0;
+}
+
+.fade-in-up {
+    display: block !important;
+    animation: fadeInUpContent 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes fadeInUpContent {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ESTILOS DEL CONTENEDOR HERO */
+.hero-catalog {
+    position: relative;
+    width: 100%;
+    min-height: 45vh; /* Altura ideal para que no tape toda la pantalla en desktop */
+    background-color: var(--bg-hero-salon);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* CONTENEDOR INTERNO DEL CONTENIDO */
+.hero-content {
+    position: relative;
+    max-width: 750px; /* Ancho de lectura óptimo para que no quede una línea eterna */
+    margin: 0 auto;
+    z-index: 2;
+}
+
+/* LOGO DEL SALÓN EN EL HERO */
+.hero-logo {
+    max-width: 100px;
+    height: auto;
+    margin-bottom: 25px;
+    display: inline-block;
+}
+
+/* TÍTULO PRINCIPAL */
+.hero-title {
+    font-size: 2.4rem;
+    color: var(--texto-hero-principal);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    margin-bottom: 15px;
+}
+
+/* LÍNEA DIVISORIA ESTÉTICA */
+.hero-divider {
+    width: 60px;
+    height: 3px;
+    background-color: var(--color-detalles);
+    margin: 0 auto 20px auto;
+    border-radius: 2px;
+}
+
+/* DESCRIPCIÓN O BAJADA DE TEXTO */
+.hero-description {
+    font-size: 1.05rem;
+    color: var(--texto-hero-bajada);
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+/* RESPONSIVE DESIGN (Para celulares) */
+@media (max-width: 768px) {
+    .hero-catalog {
+        padding: 40px 15px;
+        min-height: auto;
+    }
+    
+    .hero-logo {
+        max-width: 110px;
+        margin-bottom: 20px;
+    }
+    
+    .hero-title {
+        font-size: 1.8rem;
+    }
+    
+    .hero-description {
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+}
+
+/* VARIABLES DE COLOR PARA SECCIONES */
+:root {
+    --bg-botones-filtro: #e0e0e0;
+    --texto-botones: #333333;
+}
+
+/* CONTENEDOR DE LA CATEGORÍA */
+.category-section {
+    max-width: 900px;
+    margin: 60px auto;
+    padding:  20px;
+    background-color: #313131;
+}
+
+.category-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-top: 20px;
+}
+
+.category-title {
+    font-size: 1.8rem;
+    color:#bd9b53;
+    margin-bottom: 12px;
+}
+
+.category-description {
+    font-size: 1rem;
+    color: cornsilk;
+    line-height: 1.5;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+/* CONTENEDOR DEL VISUALIZADOR */
+.showcase-container {
+    /* background-color: var(--bg-secundario, #f9f9f9); */
+    border-radius: 16px;
+    padding: 30px;
+    border: 1px solid rgba(0,0,0,0.04);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+}
+
+/* GALERÍA DE IMÁGENES */
+.gallery-display {
+    position: relative;
+    width: 100%;
+    max-width: 380px; /* Tamaño controlado estilo pantalla de celular */
+    margin: 0 auto 30px auto;
+    min-height: 500px; /* Evita saltos de diseño si las imágenes varían milímetros */
+}
+
+.gallery-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: scale(0.98);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none; /* Evita clics accidentales en capas ocultas */
+}
+
+/* Clase activa controlada por JS */
+.gallery-item.active {
+    position: relative;
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    display: block;
+}
+
+/* Etiqueta flotante sobre la imagen */
+.model-badge {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(10, 10, 10, 0.85);
+    color: #ffffff;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+}
+
+/* BOTONES DE FILTRO */
+.filter-controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 12px 24px;
+    border: none;
+    background-color: var(--bg-botones-filtro);
+    color: var(--texto-botones);
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    background-color: #d0d0d0;
+}
+
+/* Estado activo del botón (Combina con el acento dorado/institucional) */
+.filter-btn.active {
+    background-color: var(--color-detalles);
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(189, 155, 83, 0.3);
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 600px) {
+    .gallery-display {
+        max-width: 280px;
+        min-height: 400px;
+    }
+    
+    .filter-btn {
+        padding: 10px 18px;
+        font-size: 0.85rem;
+        flex: 1;
+        min-width: 100px;
+        text-align: center;
+    }
+}

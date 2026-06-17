@@ -48,3 +48,34 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// --- LOGICA DE LA LIGHTBOX (VER IMAGEN COMPLETA) ---
+document.addEventListener('DOMContentLoaded', () => {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.querySelector('.lightbox-close');
+    const zoomImages = document.querySelectorAll('.zoom');
+
+    // Al hacer clic en cualquier imagen con la clase zoom-img
+    zoomImages.forEach(img => {
+        img.addEventListener('click', () => {
+            lightboxImg.src = img.src; // Copia la ruta de la imagen
+            lightbox.classList.add('show'); // Muestra el panel
+            document.body.style.overflow = 'hidden'; // Bloquea el scroll del fondo
+        });
+    });
+
+    // Función para cerrar
+    const closeLightbox = () => {
+        lightbox.classList.remove('show');
+        document.body.style.overflow = 'auto'; // Devuelve el scroll
+    };
+
+    // Cerrar al tocar la X o al tocar el fondo negro
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            closeLightbox();
+        }
+    });
+});

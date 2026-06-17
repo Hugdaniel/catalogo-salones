@@ -374,3 +374,351 @@ body {
         text-align: center;
     }
 }
+
+/* estilos de las invitaciones web interactivas */
+
+/* VARIABLES ADAPTADAS A TU NUEVA ESTÍTICA DARK */
+:root {
+    --texto-dorado: #bd9b53; /* Ajustá este amarillo/dorado a tu gusto */
+    --texto-blanco: #ffffff;
+    --texto-gris-claro: #cccccc;
+    --bg-tarjeta-dark: #1e1e1e; /* Gris oscuro para las tarjetas */
+}
+
+/* Personalización de títulos para esta sección (Siguiendo tus cambios) */
+.category-title-web {
+    font-size: 1.8rem;
+    color: var(--texto-dorado);
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.category-description-web {
+    font-size: 1rem;
+    color: var(--texto-blanco);
+    line-height: 1.5;
+    max-width: 650px;
+    margin: 0 auto 40px auto;
+    text-align: center;
+}
+
+/* GRID CONTENEDOR (3 Columnas) */
+.web-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* ESTILO GENERAL DE LA TARJETA WEB */
+.web-card {
+    background-color: var(--bg-tarjeta-dark);
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.web-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Ajustes visuales para las tarjetas que son solo conceptuales (un poquito más opacas) */
+.web-card.conceptual-product {
+    opacity: 0.85;
+}
+
+/* IMÁGENES DENTRO DE LAS TARJETAS */
+.web-card-media {
+    width: 100%;
+    height: 220px; /* Altura fija para que todas las tarjetas queden alineadas simétricamente */
+    overflow: hidden;
+}
+
+.web-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recorta la imagen para que llene el contenedor sin deformarse */
+}
+
+/* INFORMACIÓN DE LA TARJETA */
+.web-card-info {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Empuja el botón siempre hacia el fondo de la tarjeta */
+}
+
+.web-card-info h3 {
+    color: var(--texto-blanco);
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.web-card-info p {
+    color: var(--texto-gris-claro);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* BOTONES DE ACCIÓN */
+.web-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    background-color: var(--texto-dorado);
+    color: #121212; /* Texto oscuro sobre el botón dorado para legibilidad */
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    margin-top: auto; /* Truco CSS para alinear el botón abajo pase lo que pase con el texto */
+    transition: background-color 0.2s;
+}
+
+.web-btn:hover {
+    filter: brightness(1.1);
+}
+
+/* Botón deshabilitado para XV y Bodas */
+.web-btn.disabled {
+    background-color: #333333;
+    color: #777777;
+    cursor: not-allowed;
+}
+
+/* BADGES FLOTANTES (En vivo / Próximamente) */
+.web-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    z-index: 5;
+}
+.web-badge.live { background-color: #28a745; color: #ffffff; }
+.web-badge.concept { background-color: #555555; color: #dddddd; }
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+    .web-grid {
+        gap: 20px;
+    }
+    .web-card-media {
+        height: 180px;
+    }
+}
+
+/* ESTILOS DE LA VENTANA FLOTANTE (LIGHTBOX) */
+.lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(10, 10, 10, 0.95); /* Fondo negro translúcido premium */
+    z-index: 100000; /* Por encima de todo, incluso del loader */
+    display: none; /* Oculto por defecto */
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Cuando se activa la ventana */
+.lightbox-overlay.show {
+    display: flex;
+    opacity: 1;
+}
+
+/* La imagen ampliada */
+#lightbox-img {
+    max-width: 90%;
+    max-height: 85vh; /* Se adapta al alto de la pantalla del dispositivo */
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
+
+.lightbox-overlay.show #lightbox-img {
+    transform: scale(1); /* Efecto pop-up suave */
+}
+
+/* Botón de cerrar (X) */
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: var(--texto-blanco, #fff);
+    font-size: 40px;
+    font-weight: 300;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.lightbox-close:hover {
+    color: var(--texto-dorado, #bd9b53);
+}
+
+/* EXTENSIÓN PARA EL ECOSISTEMA INTERACTIVO (ÁLBUM Y MURO) */
+.interactive-ecosystem {
+    max-width: 1100px;
+    margin: 80px auto;
+}
+
+/* BLOQUE DE CARACTERÍSTICA (FLEXBOX BIDIRECCIONAL) */
+.feature-block {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    background-color: var(--bg-tarjeta-dark, #1e1e1e);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-block:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* CONTENEDOR DE TEXTO E INFO */
+.feature-info {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinea el badge y elementos a la izquierda */
+}
+
+.feature-info h3 {
+    font-size: 1.6rem;
+    color: var(--texto-blanco, #ffffff);
+    margin: 15px 0;
+    letter-spacing: -0.3px;
+}
+
+.feature-info p {
+    color: var(--texto-gris-claro, #cccccc);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+/* Reutilizamos el botón de la sección web, adaptando su comportamiento */
+.feature-info .web-btn {
+    width: auto; /* No ocupa todo el ancho, solo el de su texto */
+    padding: 12px 35px;
+    border-radius: 30px; /* Redondeado premium estilo píldora */
+}
+
+/* CONTENEDOR DE IMAGEN / MULTIMEDIA */
+.feature-media {
+    flex: 1;
+    min-width: 300px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+.feature-media img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.feature-block:hover .feature-media img {
+    transform: scale(1.03); /* Efecto zoom sutil al pasar el mouse por el bloque */
+}
+
+/* EL TRUCO DEL REVERSE: Invierte el orden de los factores en pantallas grandes */
+.feature-block.reverse {
+    flex-direction: row-reverse;
+}
+
+/* BADGE ESPECÍFICO PARA ESTOS SISTEMAS */
+.feature-info .web-badge {
+    position: static; /* Le saca el posicionamiento absoluto flotante */
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+/* RESPONSIVE DESIGN FOR TABLETS & MOBILES */
+@media (max-width: 850px) {
+    .feature-block, 
+    .feature-block.reverse {
+        flex-direction: column; /* Pasa a formato vertical en celulares */
+        gap: 30px;
+        padding: 30px 20px;
+    }
+    
+    .feature-media {
+        width: 100%;
+    }
+    
+    .feature-info .web-btn {
+        width: 100%; /* El botón pasa a ser ancho completo en móviles para mejor clic */
+        text-align: center;
+    }
+    
+    .feature-info h3 {
+        font-size: 1.4rem;
+    }
+}
+
+/* footer */
+/* FOOTER PREMIUM STYLES */
+.main-footer {
+    width: 100%;
+    background-color: #0a0a0a; /* Un tono más oscuro que el fondo general para dar cierre */
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+    padding: 30px 20px;
+    margin-top: 100px;
+}
+
+.footer-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.footer-brand {
+    color: var(--texto-gris-claro, #cccccc);
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: -0.2px;
+}
+
+.footer-tagline {
+    color: var(--texto-dorado, #bd9b53); /* Tu color dorado de acento */
+    font-size: 0.85rem;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+}
